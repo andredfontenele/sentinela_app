@@ -1,4 +1,4 @@
-package com.sentinela.application.Entidades;
+package com.sentinela.application.Entity;
 
 public class Carro {
     

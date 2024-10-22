@@ -24,8 +24,8 @@ public class Usuario {
 	@Column(name="senha")
 	private String senha;
 
-	public Usuario(Long id, String nome, String email, String senha) {
-	}
+	@Column(name="qrcode")
+	private String qrcode;
 
 	public Long getId() {
 		return id;
@@ -57,5 +57,13 @@ public class Usuario {
 
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+
+	public String getQrcode(){
+		return qrcode;
+	}
+
+	public void setQrcode(String qrcode){
+		this.qrcode = qrcode;
 	}
 }

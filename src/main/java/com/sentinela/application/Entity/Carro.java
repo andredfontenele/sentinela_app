@@ -19,6 +19,7 @@ public class Carro {
     private int ano;
     private String marca;
     private String cidade;
+    private String qrcode;
 
     @Column(name = "placa")
     private String placa;
@@ -79,4 +80,12 @@ public class Carro {
     public void setPlace(String placa) {
         this.placa = placa;
     }
+
+    public String getQrcode(){
+		return qrcode;
+	}
+
+	public void setQrcode(String qrcode){
+		this.qrcode = qrcode;
+	}
 }

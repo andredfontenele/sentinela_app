@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.sentinela.application.Entity.Carro;
 
 @Repository
-public interface CarroRepository extends JpaRepository<Carro, Integer>{
+public interface CarroRepository extends JpaRepository<Carro, Long>{
     
 }

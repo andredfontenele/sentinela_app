@@ -16,10 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.sentinela.application.Entity.Usuario;
 import com.sentinela.application.Repository.UsuarioRepository;
 
-
-
-
-
 @RestController
 @RequestMapping("/usuario")
 public class UsuarioController {

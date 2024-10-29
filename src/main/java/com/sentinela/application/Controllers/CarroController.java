@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sentinela.application.Entity.Carro;
 import com.sentinela.application.Repository.CarroRepository;
+import com.sentinela.application.Servicos.QrCodeService;
 
 
 
@@ -25,6 +26,8 @@ public class CarroController {
         
         @Autowired
         private CarroRepository carroRepository;
+        @Autowired
+        private QrCodeService qrCode;
 
         @GetMapping("/getCarro")
         public List<Carro> getCarro(){
@@ -34,6 +37,17 @@ public class CarroController {
 
         @PostMapping("/postCarro")
         public void postCarro(@RequestBody Carro carro){
+
+            String code;
+
+            try{
+                code = qrCode.generateQrCode(carro);
+            } catch(Exception e){
+                System.out.println(e);
+                return;
+            }
+    
+            carro.setQrcode(code);
             carroRepository.save(carro);
         }
 
@@ -46,6 +60,18 @@ public class CarroController {
             }
 
             Carro carroUpdate = carroObject.get();
+
+            
+            String code;
+
+            try{
+                code = qrCode.generateQrCode(carro);
+            } catch(Exception e){
+                System.out.println(e);
+                return "Erro ao gerar QrCoe";
+            }
+    
+            carro.setQrcode(code);
 
             carro.setId(carroUpdate.getId());
             carroRepository.save(carro);

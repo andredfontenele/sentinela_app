@@ -19,6 +19,8 @@ public class Carro {
     private int ano;
     private String marca;
     private String cidade;
+    
+    @Column(name="qrcode", columnDefinition="TEXT")
     private String qrcode;
 
     @Column(name = "placa")

@@ -1,5 +1,8 @@
 package com.sentinela.application.Entity;
 
+import org.hibernate.annotations.Type;
+import org.springframework.data.jpa.repository.Temporal;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -24,8 +27,11 @@ public class Usuario {
 	@Column(name="senha")
 	private String senha;
 
-	@Column(name="qrcode")
+	@Column(name="qrcode", columnDefinition="TEXT")
 	private String qrcode;
+
+	@Column(name="admin")
+	private boolean admin;
 
 	public Long getId() {
 		return id;
@@ -65,5 +71,13 @@ public class Usuario {
 
 	public void setQrcode(String qrcode){
 		this.qrcode = qrcode;
+	}
+
+	public boolean getAdmin(){
+		return admin;
+	}
+
+	public void setAdmin(boolean admin){
+		this.admin = admin;
 	}
 }

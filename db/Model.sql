@@ -7,6 +7,7 @@ CREATE TABLE usuarios (
 	"email" varchar(255) NOT NULL,
 	"senha" varchar(255) NOT NULL,
 	"qrcode" varchar(255) NULL,
+	"admin" boolean NULL,
 	CONSTRAINT usuarios_pkey PRIMARY KEY (id)
 );
 

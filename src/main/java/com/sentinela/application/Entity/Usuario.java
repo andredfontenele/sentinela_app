@@ -1,8 +1,5 @@
 package com.sentinela.application.Entity;
 
-import org.hibernate.annotations.Type;
-import org.springframework.data.jpa.repository.Temporal;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

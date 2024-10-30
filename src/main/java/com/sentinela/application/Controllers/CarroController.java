@@ -17,6 +17,10 @@ import com.sentinela.application.Entity.Carro;
 import com.sentinela.application.Repository.CarroRepository;
 import com.sentinela.application.Servicos.QrCodeService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+
 
 
 
@@ -29,12 +33,23 @@ public class CarroController {
         @Autowired
         private QrCodeService qrCode;
 
+        
+        @Operation(summary = "Obter todos os carros.", description = "Retorna uma lista de todos os carros cadastrados.")
+        @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Carros encontrados com sucesso."),
+            @ApiResponse(responseCode = "404", description = "Nenhum carro encontrado.")
+        })
         @GetMapping("/getCarro")
         public List<Carro> getCarro(){
             List<Carro> carros = carroRepository.findAll();
             return carros;
         }
 
+        @Operation(summary = "Cadastrar novo carro.", description = "Rota para cadastro de um novo carro no sistema.")
+        @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Carro cadastrado com sucesso."),
+            @ApiResponse(responseCode = "404", description = "Erro na operação.")
+        })
         @PostMapping("/postCarro")
         public void postCarro(@RequestBody Carro carro){
 
@@ -51,6 +66,11 @@ public class CarroController {
             carroRepository.save(carro);
         }
 
+        @Operation(summary = "Atualizar carro.", description = "Rota para atualização do cadastro de um carro existente no sistema.")
+        @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Carro atualizado com sucesso."),
+            @ApiResponse(responseCode = "404", description = "Erro na operação.")
+        })
         //INTEGER ID ou LONG ID?
         @PutMapping("/putCarro")
         public String putCarro(@RequestParam Long id, @RequestBody Carro carro){
@@ -78,6 +98,11 @@ public class CarroController {
             return "Carro atualizado";
         }
 
+        @Operation(summary = "Deletar um carro.", description = "Rota para deletar um carro no sistema.")
+        @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Carro deletado com sucesso."),
+            @ApiResponse(responseCode = "404", description = "Erro na operação.")
+        })
         @DeleteMapping("/deleteCarro")
         public void deleteCarro(@RequestParam Long id){
             carroRepository.deleteById(id);

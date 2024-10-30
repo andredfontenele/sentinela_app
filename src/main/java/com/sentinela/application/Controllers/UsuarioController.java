@@ -18,6 +18,10 @@ import com.sentinela.application.Entity.Usuario;
 import com.sentinela.application.Repository.UsuarioRepository;
 import com.sentinela.application.Servicos.QrCodeService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+
 @RestController
 @RequestMapping("/usuario")
 public class UsuarioController {
@@ -29,12 +33,23 @@ public class UsuarioController {
     @Autowired
     private PasswordEncoder passEncoder;
 
+
+    @Operation(summary = "Obter todos os usuários.", description = "Retorna uma lista de todos os usuários cadastrados.")
+        @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Usuários encontrados com sucesso."),
+            @ApiResponse(responseCode = "404", description = "Nenhum usuário encontrado.")
+        })
     @GetMapping("/getUsuario")
     public List<Usuario> getUsuarios(){
        List<Usuario> usuarios = usuarioRepository.findAll();
        return usuarios;
     }
 
+    @Operation(summary = "Cadastrar novo usuário.", description = "Rota para cadastro de um novo usuário no sistema.")
+        @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Usuário cadastrado com sucesso."),
+            @ApiResponse(responseCode = "404", description = "Erro na operação.")
+        })
     @PostMapping("/postUsuario")
     public void postUsuario(@RequestBody Usuario usuario) {
 
@@ -54,6 +69,11 @@ public class UsuarioController {
         usuarioRepository.save(usuario);
     }
 
+    @Operation(summary = "Atualizar usuário.", description = "Rota para atualização do cadastro de um usuário existente no sistema.")
+        @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Usuário atualizado com sucesso."),
+            @ApiResponse(responseCode = "404", description = "Erro na operação.")
+        })
     @PutMapping("/putUsuario")
     public String putUsuario(@RequestParam Long id, @RequestBody Usuario usuario) {
         Optional<Usuario> usuarioObject = usuarioRepository.findById(id);
@@ -81,6 +101,11 @@ public class UsuarioController {
         return "Usuário atualizado";
     }
 
+    @Operation(summary = "Deletar um usuário.", description = "Rota para deletar um usuário no sistema.")
+        @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Usuário deletado com sucesso."),
+            @ApiResponse(responseCode = "404", description = "Erro na operação.")
+        })
     @DeleteMapping("/deleteUsuario")
     public void deleteUsuario(@RequestParam Long id) {
         usuarioRepository.deleteById(id);
